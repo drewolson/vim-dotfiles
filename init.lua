@@ -315,7 +315,6 @@ local vanilla_servers = {
   'gleam',
   'intelephense',
   'racket_langserver',
-  'roc_ls',
   'ruff',
   'rust_analyzer',
   'ts_ls',
@@ -335,6 +334,26 @@ for _, lsp in ipairs(vanilla_servers) do
 
   vim.lsp.enable(lsp)
 end
+
+vim.lsp.config('roc', {
+  on_attach = _G.lsp_on_attach,
+  capabilities = _G.lsp_capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  cmd = {
+    'roc',
+    'experimental-lsp'
+  },
+  filetypes = {
+    'roc',
+  },
+  root_markers = {
+    '.git',
+    '.jj',
+  }
+})
+vim.lsp.enable('roc')
 
 vim.lsp.config('gopls', {
   on_attach = _G.lsp_on_attach,
@@ -456,6 +475,24 @@ require('neo-tree').setup({
       ["os"] = "noop",
       ["ot"] = "noop",
       ["I"] = "toggle_hidden",
+      ["a"] = {
+        "add",
+        config = {
+          show_path = "relative",
+        },
+      },
+      ["c"] = {
+        "copy",
+        config = {
+          show_path = "relative",
+        },
+      },
+      ["m"] = {
+        "move",
+        config = {
+          show_path = "relative",
+        },
+      },
     }
   }
 })
