@@ -91,9 +91,11 @@ require("lazy").setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    opts = {
-      mappings = true,
-    },
+    init = function(_)
+      vim.g.lean_config = {
+        mappings = true
+      }
+    end,
   }
 })
 
